@@ -1,0 +1,1647 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sentra - Find Your Vibe</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet">
+  <style>
+    body {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .app-container {
+      width: 100%;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
+      background-size: 400% 400%;
+      animation: gradientFlow 15s ease infinite;
+      position: relative;
+      overflow-y: auto;
+    }
+
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      padding: 32px;
+      margin: 20px auto;
+      max-width: 500px;
+      width: 90%;
+      animation: fadeInUp 0.6s ease;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .logo-header {
+      text-align: center;
+      margin-bottom: 32px;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .logo-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 48px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #ffd700, #ffed4e, #00f2fe);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin: 0;
+      text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+    }
+
+    .tagline {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 16px;
+      margin-top: 8px;
+      font-weight: 300;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+    }
+
+    .input-label {
+      display: block;
+      color: rgba(255, 255, 255, 0.95);
+      font-size: 14px;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 14px 18px;
+      background: rgba(255, 255, 255, 0.15);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 16px;
+      color: white;
+      font-size: 15px;
+      font-family: 'Poppins', sans-serif;
+      transition: all 0.3s ease;
+    }
+
+    .input-field:focus {
+      outline: none;
+      background: rgba(255, 255, 255, 0.2);
+      border-color: #ffd700;
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+    }
+
+    .input-field::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .btn-primary {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, #ffd700, #ffed4e);
+      border: none;
+      border-radius: 16px;
+      color: #1a1a2e;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+
+    .btn-secondary {
+      width: 100%;
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 16px;
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 12px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .text-link {
+      text-align: center;
+      margin-top: 20px;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 14px;
+    }
+
+    .text-link a {
+      color: #ffd700;
+      text-decoration: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .text-link a:hover {
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+    }
+
+    .profile-icon {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ffd700, #ffed4e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 24px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .profile-icon:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+    }
+
+    .mood-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 16px;
+      margin: 24px 0;
+    }
+
+    .mood-card {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      padding: 24px 16px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mood-card::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 215, 0, 0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.5s ease, height 0.5s ease;
+    }
+
+    .mood-card:hover::before {
+      width: 200%;
+      height: 200%;
+    }
+
+    .mood-card:hover {
+      transform: translateY(-5px);
+      border-color: #ffd700;
+      box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+    }
+
+    .mood-card.selected {
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(0, 242, 254, 0.3));
+      border-color: #ffd700;
+      transform: scale(1.05);
+    }
+
+    .mood-emoji {
+      font-size: 48px;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .mood-label {
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      position: relative;
+      z-index: 1;
+    }
+
+    .time-selector {
+      display: flex;
+      gap: 12px;
+      margin: 24px 0;
+      flex-wrap: wrap;
+    }
+
+    .time-btn {
+      flex: 1;
+      min-width: 100px;
+      padding: 14px;
+      background: rgba(255, 255, 255, 0.15);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 16px;
+      color: white;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .time-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .time-btn.selected {
+      background: linear-gradient(135deg, #00f2fe, #4facfe);
+      border-color: #00f2fe;
+    }
+
+    .place-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(15px);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      overflow: hidden;
+      margin-bottom: 20px;
+      transition: all 0.4s ease;
+      cursor: pointer;
+    }
+
+    .place-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+      border-color: #ffd700;
+    }
+
+    .place-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+    }
+
+    .place-content {
+      padding: 20px;
+    }
+
+    .place-name {
+      color: white;
+      font-size: 20px;
+      font-weight: 700;
+      margin: 0 0 8px 0;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .place-description {
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 14px;
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+
+    .place-details {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .detail-item {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-navigate {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #00f2fe, #4facfe);
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .btn-navigate:hover {
+      transform: scale(1.02);
+      box-shadow: 0 6px 20px rgba(0, 242, 254, 0.4);
+    }
+
+    .section-title {
+      color: white;
+      font-size: 28px;
+      font-weight: 700;
+      margin: 32px 0 20px 0;
+      text-align: center;
+      font-family: 'Space Grotesk', sans-serif;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .ai-suggestion {
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3));
+      backdrop-filter: blur(15px);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 600px;
+      width: 90%;
+      text-align: center;
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .ai-suggestion-text {
+      color: white;
+      font-size: 16px;
+      line-height: 1.6;
+      font-style: italic;
+      margin: 0;
+    }
+
+    .ai-label {
+      color: #ffd700;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .voice-search {
+      position: relative;
+      margin: 20px 0;
+    }
+
+    .mic-btn {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: linear-gradient(135deg, #ffd700, #ffed4e);
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      font-size: 18px;
+    }
+
+    .mic-btn:hover {
+      transform: translateY(-50%) scale(1.1);
+      box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+    }
+
+    .mic-btn.listening {
+      animation: micPulse 1s ease infinite;
+    }
+
+    @keyframes micPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); }
+      50% { box-shadow: 0 0 0 15px rgba(255, 215, 0, 0); }
+    }
+
+    .map-container {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(15px);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 24px;
+      margin: 20px auto;
+      max-width: 800px;
+      width: 90%;
+    }
+
+    .route-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .route-btn {
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 12px;
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
+    }
+
+    .route-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .route-btn.selected {
+      background: linear-gradient(135deg, #4ade80, #22c55e);
+      border-color: #4ade80;
+    }
+
+    .map-placeholder {
+      width: 100%;
+      height: 400px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 18px;
+      font-weight: 600;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .map-overlay {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(10px);
+      padding: 16px;
+      border-radius: 12px;
+      color: white;
+      font-size: 14px;
+    }
+
+    .history-item {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 20px;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    .history-item:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateX(5px);
+    }
+
+    .history-name {
+      color: white;
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .history-date {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 13px;
+    }
+
+    .btn-small {
+      padding: 8px 16px;
+      background: linear-gradient(135deg, #00f2fe, #4facfe);
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .btn-small:hover {
+      transform: scale(1.05);
+    }
+
+    .loading-spinner {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: #ffd700;
+      animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .error-message {
+      background: rgba(239, 68, 68, 0.2);
+      border: 1px solid rgba(239, 68, 68, 0.5);
+      color: white;
+      padding: 12px;
+      border-radius: 12px;
+      margin: 12px 0;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .success-message {
+      background: rgba(34, 197, 94, 0.2);
+      border: 1px solid rgba(34, 197, 94, 0.5);
+      color: white;
+      padding: 12px;
+      border-radius: 12px;
+      margin: 12px 0;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .content-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 20px 40px 20px;
+    }
+
+    .back-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 24px;
+      color: white;
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .back-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.1);
+    }
+
+    @media (max-width: 768px) {
+      .logo-title {
+        font-size: 36px;
+      }
+
+      .section-title {
+        font-size: 24px;
+      }
+
+      .mood-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 12px;
+      }
+
+      .mood-emoji {
+        font-size: 36px;
+      }
+
+      .time-selector {
+        flex-direction: column;
+      }
+
+      .time-btn {
+        width: 100%;
+      }
+
+      .glass-panel {
+        padding: 24px;
+      }
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .file-upload {
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .file-upload input[type="file"] {
+      position: absolute;
+      font-size: 100px;
+      opacity: 0;
+      right: 0;
+      top: 0;
+      cursor: pointer;
+    }
+
+    .file-upload-btn {
+      width: 100%;
+      padding: 14px;
+      background: rgba(255, 255, 255, 0.15);
+      border: 2px dashed rgba(255, 255, 255, 0.5);
+      border-radius: 16px;
+      color: white;
+      font-size: 14px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .file-upload-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: #ffd700;
+    }
+
+    .profile-preview {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      object-fit: cover;
+      border: 3px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .nav-tab {
+      padding: 12px 24px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 12px;
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .nav-tab:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .nav-tab.active {
+      background: linear-gradient(135deg, #ffd700, #ffed4e);
+      color: #1a1a2e;
+      border-color: #ffd700;
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="app-container" id="app"><!-- Content will be dynamically rendered here -->
+  </div>
+  <script>
+    let currentUser = null;
+    let currentView = 'signin';
+    let selectedMood = null;
+    let selectedTime = null;
+    let currentPlace = null;
+    let selectedRoute = null;
+    let allUsers = JSON.parse(localStorage.getItem('sentraUsers') || '[]');
+
+    const moods = [
+      { emoji: '🥱', label: 'Bored', type: 'bored' },
+      { emoji: '😔', label: 'Lonely', type: 'lonely' },
+      { emoji: '🧘', label: 'Peace', type: 'peace' },
+      { emoji: '🥳', label: 'Fun', type: 'fun' },
+      { emoji: '😍', label: 'Romantic', type: 'romantic' },
+      { emoji: '🎨', label: 'Creative', type: 'creative' },
+      { emoji: '⛰️', label: 'Adventure', type: 'adventure' },
+      { emoji: '🍔', label: 'Hungry', type: 'hungry' }
+    ];
+
+    const placesDatabase = {
+      'bored-30': [
+        { name: 'Urban Arcade Lounge', description: 'Hidden retro gaming spot with neon lights and craft sodas', distance: '1.2 km', cost: '₹200', rating: '4.7', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1511882150382-421056c89033?w=800' },
+        { name: 'Pottery Workshop Studio', description: 'Quick pottery taster session - create your own mug', distance: '2.5 km', cost: '₹300', rating: '4.8', crowd: 'free', image: 'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=800' },
+        { name: 'Comic Book Café', description: 'Browse rare comics while sipping specialty coffee', distance: '0.8 km', cost: '₹150', rating: '4.6', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800' },
+        { name: 'Virtual Reality Zone', description: '30-min VR experience - explore new worlds', distance: '1.8 km', cost: '₹350', rating: '4.9', crowd: 'busy', image: 'https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?w=800' },
+        { name: 'Rooftop Chess Club', description: 'Play speed chess with city skyline views', distance: '1.5 km', cost: 'Free', rating: '4.5', crowd: 'free', image: 'https://images.unsplash.com/photo-1529699211952-734e80c4d42b?w=800' },
+        { name: 'Mini Golf Garden', description: 'Quirky 9-hole mini golf through themed gardens', distance: '2.2 km', cost: '₹180', rating: '4.7', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1587280501635-68a0e82cd5ff?w=800' }
+      ],
+      'bored-60': [
+        { name: 'Indoor Trampoline Park', description: 'Bounce around and try ninja warrior obstacles', distance: '3.2 km', cost: '₹400', rating: '4.8', crowd: 'busy', image: 'https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=800' },
+        { name: 'Escape Room Adventures', description: 'Solve puzzles and mysteries with strangers', distance: '2.1 km', cost: '₹500', rating: '4.9', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1528991435120-e73e05a58897?w=800' },
+        { name: 'Laser Tag Arena', description: 'Tactical combat in a futuristic neon maze', distance: '2.8 km', cost: '₹350', rating: '4.7', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=800' },
+        { name: 'Cooking Class Studio', description: 'Learn to make authentic street food', distance: '1.9 km', cost: '₹450', rating: '4.8', crowd: 'free', image: 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800' },
+        { name: 'Bowling Alley Lounge', description: 'Retro lanes with craft beer and live DJ', distance: '3.5 km', cost: '₹300', rating: '4.6', crowd: 'busy', image: 'https://images.unsplash.com/photo-1564981797816-1043664bf78d?w=800' },
+        { name: 'Art Jamming Studio', description: 'Freestyle painting with unlimited supplies', distance: '2.4 km', cost: '₹400', rating: '4.7', crowd: 'free', image: 'https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=800' }
+      ],
+      'bored-120': [
+        { name: 'Go-Kart Racing Track', description: 'Speed through curves on professional karting circuit', distance: '5.2 km', cost: '₹600', rating: '4.9', crowd: 'busy', image: 'https://images.unsplash.com/photo-1563297007-0686b7003af7?w=800' },
+        { name: 'Axe Throwing Venue', description: 'Learn the art of axe throwing with expert coaches', distance: '4.1 km', cost: '₹550', rating: '4.8', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1609710228159-0fa9bd7c0827?w=800' },
+        { name: 'Rock Climbing Gym', description: 'Challenge yourself on indoor bouldering walls', distance: '3.8 km', cost: '₹500', rating: '4.8', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1522163182402-834f871fd851?w=800' },
+        { name: 'Cinema Dine-In Theater', description: 'Watch indie films with gourmet meal service', distance: '4.5 km', cost: '₹700', rating: '4.7', crowd: 'busy', image: 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=800' },
+        { name: 'Paint Your Pet Workshop', description: 'Create a custom portrait of your favorite animal', distance: '3.2 km', cost: '₹600', rating: '4.9', crowd: 'free', image: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800' },
+        { name: 'Vintage Arcade Bar', description: 'Classic arcade games with craft cocktails', distance: '4.8 km', cost: '₹450', rating: '4.6', crowd: 'busy', image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800' }
+      ],
+      'lonely-30': [
+        { name: 'Dog Café Cuddle Corner', description: 'Friendly pups and warm beverages - instant mood lift', distance: '1.5 km', cost: '₹250', rating: '4.9', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1534351450181-ea9f78427fe8?w=800' },
+        { name: 'Community Art Gallery', description: 'Local artists exhibiting - chat with creators', distance: '0.9 km', cost: 'Free', rating: '4.6', crowd: 'free', image: 'https://images.unsplash.com/photo-1531243269054-5ebf6f34081e?w=800' },
+        { name: 'Open Mic Poetry Night', description: 'Intimate venue for sharing stories and verses', distance: '1.8 km', cost: '₹100', rating: '4.7', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800' },
+        { name: 'Coworking Social Space', description: 'Meet fellow creatives over complimentary tea', distance: '1.2 km', cost: 'Free', rating: '4.5', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800' },
+        { name: 'Board Game Café', description: 'Join random players for friendly competition', distance: '2.1 km', cost: '₹200', rating: '4.8', crowd: 'busy', image: 'https://images.unsplash.com/photo-1610890716171-6b1bb98ffd09?w=800' },
+        { name: 'Volunteer Kitchen', description: 'Help cook meals while meeting kind souls', distance: '2.8 km', cost: 'Free', rating: '4.9', crowd: 'free', image: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800' }
+      ],
+      'lonely-60': [
+        { name: 'Live Music Jazz Bar', description: 'Intimate performances with communal seating', distance: '2.7 km', cost: '₹300', rating: '4.8', crowd: 'busy', image: 'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=800' },
+        { name: 'Pottery Wheel Class', description: 'Group session where everyone helps each other', distance: '3.1 km', cost: '₹400', rating: '4.7', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?w=800' },
+        { name: 'Community Garden Meetup', description: 'Garden together and share fresh produce', distance: '2.5 km', cost: 'Free', rating: '4.9', crowd: 'free', image: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800' },
+        { name: 'Cat Lounge & Library', description: 'Read books surrounded by adoptable cats', distance: '1.8 km', cost: '₹250', rating: '4.8', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?w=800' },
+        { name: 'Dance Class Drop-In', description: 'Beginner salsa class with friendly atmosphere', distance: '3.4 km', cost: '₹350', rating: '4.6', crowd: 'busy', image: 'https://images.unsplash.com/photo-1504609813442-a8924e83f76e?w=800' },
+        { name: 'Cooking Together Workshop', description: 'Make a meal with other solo diners', distance: '2.9 km', cost: '₹500', rating: '4.8', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800' }
+      ],
+      'lonely-120': [
+        { name: 'Group Hiking Expedition', description: 'Join fellow adventurers on scenic trail', distance: '6.5 km', cost: 'Free', rating: '4.9', crowd: 'free', image: 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=800' },
+        { name: 'Improv Theater Workshop', description: 'Collaborative comedy with supportive group', distance: '4.2 km', cost: '₹400', rating: '4.7', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1503095396549-807759245b35?w=800' },
+        { name: 'Community Potluck Dinner', description: 'Share homemade dishes with new friends', distance: '3.8 km', cost: '₹200', rating: '4.8', crowd: 'busy', image: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800' },
+        { name: 'Book Club Gathering', description: 'Discuss current read over coffee and snacks', distance: '2.9 km', cost: 'Free', rating: '4.6', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=800' },
+        { name: 'Karaoke Private Room', description: 'Solo-friendly rooms to join group sessions', distance: '4.5 km', cost: '₹300', rating: '4.7', crowd: 'busy', image: 'https://images.unsplash.com/photo-1511192336575-5a79af67a629?w=800' },
+        { name: 'Language Exchange Café', description: 'Practice speaking with international visitors', distance: '3.3 km', cost: 'Free', rating: '4.8', crowd: 'free', image: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800' }
+      ],
+      'peace-30': [
+        { name: 'Hidden Zen Garden', description: 'Bamboo grove with koi pond - pure serenity', distance: '2.2 km', cost: 'Free', rating: '4.9', crowd: 'free', image: 'https://images.unsplash.com/photo-1519248200396-2e4e2d628683?w=800' },
+        { name: 'Lakeside Reading Nook', description: 'Peaceful spot with benches and willow trees', distance: '1.7 km', cost: 'Free', rating: '4.7', crowd: 'free', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800' },
+        { name: 'Meditation Drop-in Center', description: 'Guided 30-min session for beginners welcome', distance: '1.3 km', cost: '₹150', rating: '4.8', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1545389336-cf090694435e?w=800' },
+        { name: 'Bonsai Garden', description: 'Miniature tree sanctuary - calming atmosphere', distance: '2.5 km', cost: '₹50', rating: '4.6', crowd: 'free', image: 'https://images.unsplash.com/photo-1470058869958-2a77ade41c02?w=800' },
+        { name: 'Riverside Walking Path', description: 'Quiet trail with gentle water sounds', distance: '1.0 km', cost: 'Free', rating: '4.8', crowd: 'free', image: 'https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=800' },
+        { name: 'Aromatherapy Lounge', description: 'Relax in scented gardens with herbal tea', distance: '1.9 km', cost: '₹200', rating: '4.7', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800' }
+      ],
+      'peace-60': [
+        { name: 'Japanese Tea Ceremony', description: 'Traditional matcha preparation in tranquil setting', distance: '3.2 km', cost: '₹350', rating: '4.9', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=800' },
+        { name: 'Botanical Conservatory', description: 'Wander through climate-controlled plant paradise', distance: '2.8 km', cost: '₹100', rating: '4.8', crowd: 'free', image: 'https://images.unsplash.com/photo-1466781783364-36c955e42a7f?w=800' },
+        { name: 'Forest Bathing Trail', description: 'Guided nature walk focusing on mindfulness', distance: '4.1 km', cost: 'Free', rating: '4.7', crowd: 'free', image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800' },
+        { name: 'Sound Healing Session', description: 'Relaxing gong bath and crystal bowl therapy', distance: '2.5 km', cost: '₹400', rating: '4.8', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800' },
+        { name: 'Waterfall Overlook', description: 'Secret viewpoint with soothing cascade sounds', distance: '3.6 km', cost: 'Free', rating: '4.9', crowd: 'free', image: 'https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?w=800' },
+        { name: 'Floating Meditation Pod', description: 'Sensory deprivation tank for deep relaxation', distance: '2.9 km', cost: '₹600', rating: '4.6', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800' }
+      ],
+      'peace-120': [
+        { name: 'Hot Springs Retreat', description: 'Natural thermal pools surrounded by nature', distance: '8.5 km', cost: '₹500', rating: '4.9', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800' },
+        { name: 'Yoga in the Park', description: '2-hour outdoor flow with meditation', distance: '3.2 km', cost: '₹250', rating: '4.8', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800' },
+        { name: 'Art Museum Quiet Hours', description: 'Contemplative viewing with minimal crowds', distance: '4.5 km', cost: '₹150', rating: '4.7', crowd: 'free', image: 'https://images.unsplash.com/photo-1499781350541-7783f6c6a0c8?w=800' },
+        { name: 'Sunset Hill Observatory', description: 'Watch golden hour from peaceful hilltop', distance: '5.8 km', cost: 'Free', rating: '4.9', crowd: 'free', image: 'https://images.unsplash.com/photo-1495954484750-af469f2f9be5?w=800' },
+        { name: 'Monastery Garden Visit', description: 'Peaceful grounds with silent walking paths', distance: '6.2 km', cost: 'Free', rating: '4.8', crowd: 'free', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800' },
+        { name: 'Pottery & Tea Workshop', description: 'Meditative clay work followed by tea ceremony', distance: '4.9 km', cost: '₹550', rating: '4.7', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1493106641515-6b5631de4bb9?w=800' }
+      ],
+      'fun-30': [
+        { name: 'Flash Mob Dance Plaza', description: 'Join spontaneous dance parties in public square', distance: '1.5 km', cost: 'Free', rating: '4.8', crowd: 'busy', image: 'https://images.unsplash.com/photo-1504609813442-a8924e83f76e?w=800' },
+        { name: 'Comedy Open Mic', description: 'Quick laughs from local comedians', distance: '1.8 km', cost: '₹150', rating: '4.7', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1585699324551-f6c309eedeca?w=800' },
+        { name: 'Street Performers Hub', description: 'Watch acrobats, musicians, and magicians', distance: '0.9 km', cost: 'Free', rating: '4.6', crowd: 'busy', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800' },
+        { name: 'Bubble Tea Arcade', description: 'Quirky drinks with retro gaming stations', distance: '1.2 km', cost: '₹200', rating: '4.9', crowd: 'busy', image: 'https://images.unsplash.com/photo-1558857563-b1d2b0e98d90?w=800' },
+        { name: 'Graffiti Alley Tour', description: 'Colorful street art photo opportunity', distance: '1.6 km', cost: 'Free', rating: '4.7', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1499781350541-7783f6c6a0c8?w=800' },
+        { name: 'Pinball Parlor', description: 'Classic machines with neon lights', distance: '2.1 km', cost: '₹180', rating: '4.5', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1511882150382-421056c89033?w=800' }
+      ],
+      'fun-60': [
+        { name: 'Rooftop Party Lounge', description: 'DJ sets with city skyline views', distance: '2.9 km', cost: '₹400', rating: '4.8', crowd: 'busy', image: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800' },
+        { name: 'Karaoke Box Deluxe', description: 'Private rooms with disco lights and effects', distance: '2.3 km', cost: '₹350', rating: '4.7', crowd: 'busy', image: 'https://images.unsplash.com/photo-1511192336575-5a79af67a629?w=800' },
+        { name: 'Cocktail Making Class', description: 'Learn mixology tricks and taste creations', distance: '3.1 km', cost: '₹500', rating: '4.9', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=800' },
+        { name: 'Glow-in-Dark Mini Golf', description: 'Neon course with UV reactive obstacles', distance: '2.7 km', cost: '₹300', rating: '4.8', crowd: 'busy', image: 'https://images.unsplash.com/photo-1587280501635-68a0e82cd5ff?w=800' },
+        { name: 'Live Band Pub', description: 'Local rock bands and dance floor', distance: '3.4 km', cost: '₹250', rating: '4.6', crowd: 'busy', image: 'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=800' },
+        { name: 'Salsa Dancing Night', description: 'Beginner-friendly with free lessons', distance: '2.8 km', cost: '₹200', rating: '4.7', crowd: 'busy', image: 'https://images.unsplash.com/photo-1504609813442-a8924e83f76e?w=800' }
+      ],
+      'fun-120': [
+        { name: 'Beach Party Bonfire', description: 'Sunset celebration with live DJ and barbecue', distance: '7.2 km', cost: '₹600', rating: '4.9', crowd: 'busy', image: 'https://images.unsplash.com/photo-1519046904884-53103b34b206?w=800' },
+        { name: 'Night Market Festival', description: 'Food trucks, games, and live entertainment', distance: '4.8 km', cost: 'Free', rating: '4.8', crowd: 'busy', image: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800' },
+        { name: 'Bowling & Billiards Club', description: 'Full evening of games with friends', distance: '3.9 km', cost: '₹450', rating: '4.7', crowd: 'busy', image: 'https://images.unsplash.com/photo-1564981797816-1043664bf78d?w=800' },
+        { name: 'Stand-up Comedy Show', description: 'Full lineup of hilarious performers', distance: '5.2 km', cost: '₹500', rating: '4.9', crowd: 'busy', image: 'https://images.unsplash.com/photo-1585699324551-f6c309eedeca?w=800' },
+        { name: 'Dinner Theater Experience', description: 'Interactive performance with meal included', distance: '6.1 km', cost: '₹800', rating: '4.8', crowd: 'busy', image: 'https://images.unsplash.com/photo-1503095396549-807759245b35?w=800' },
+        { name: 'Pub Crawl Adventure', description: 'Guided tour of best local nightlife spots', distance: '4.5 km', cost: '₹550', rating: '4.6', crowd: 'busy', image: 'https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2?w=800' }
+      ],
+      'romantic-30': [
+        { name: 'Sunset Viewpoint Bench', description: 'Perfect spot to watch golden hour together', distance: '1.8 km', cost: 'Free', rating: '4.9', crowd: 'free', image: 'https://images.unsplash.com/photo-1495954484750-af469f2f9be5?w=800' },
+        { name: 'Dessert Café Intimate', description: 'Cozy corner with artisan chocolates', distance: '1.2 km', cost: '₹300', rating: '4.8', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1481391319762-47dff72954d9?w=800' },
+        { name: 'Flower Market Stroll', description: 'Browse blooms in fragrant alleyways', distance: '0.9 km', cost: 'Free', rating: '4.7', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800' },
+        { name: 'Couples Massage Pop-up', description: 'Quick relaxation session side-by-side', distance: '1.5 km', cost: '₹400', rating: '4.8', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800' },
+        { name: 'Piano Bar Lounge', description: 'Live pianist playing romantic classics', distance: '2.1 km', cost: '₹250', rating: '4.6', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?w=800' },
+        { name: 'Stargazing Rooftop', description: 'Clear view of night sky with blankets', distance: '1.7 km', cost: 'Free', rating: '4.9', crowd: 'free', image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800' }
+      ],
+      'romantic-60': [
+        { name: 'Candlelit Wine Tasting', description: 'Sample local wines in intimate cellar', distance: '3.2 km', cost: '₹600', rating: '4.9', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=800' },
+        { name: 'Gondola Lake Ride', description: 'Private boat with cushioned seating', distance: '2.8 km', cost: '₹500', rating: '4.8', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800' },
+        { name: 'Couples Pottery Class', description: 'Create matching pieces together', distance: '2.5 km', cost: '₹450', rating: '4.7', crowd: 'free', image: 'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=800' },
+        { name: 'Hidden Garden Bistro', description: 'Secret patio with fairy lights', distance: '3.4 km', cost: '₹700', rating: '4.9', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800' },
+        { name: 'Art Gallery Date Night', description: 'Private viewing with champagne', distance: '2.9 km', cost: '₹400', rating: '4.6', crowd: 'free', image: 'https://images.unsplash.com/photo-1531243269054-5ebf6f34081e?w=800' },
+        { name: 'Dance Class for Two', description: 'Learn tango in romantic studio', distance: '3.1 km', cost: '₹500', rating: '4.8', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1504609813442-a8924e83f76e?w=800' }
+      ],
+      'romantic-120': [
+        { name: 'Hilltop Picnic Sunset', description: 'Gourmet basket with panoramic views', distance: '5.8 km', cost: '₹800', rating: '4.9', crowd: 'free', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800' },
+        { name: 'Dinner Cruise', description: 'Multi-course meal on floating restaurant', distance: '4.2 km', cost: '₹1200', rating: '4.9', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800' },
+        { name: 'Couples Spa Package', description: 'Full treatment with private suite', distance: '6.1 km', cost: '₹1500', rating: '4.8', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800' },
+        { name: 'Private Cinema Booking', description: 'Watch favorite film with luxury seating', distance: '4.5 km', cost: '₹900', rating: '4.7', crowd: 'free', image: 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=800' },
+        { name: 'Cooking Class Date', description: 'Prepare gourmet meal together', distance: '3.9 km', cost: '₹700', rating: '4.8', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800' },
+        { name: 'Observatory Night Tour', description: 'Explore cosmos through powerful telescope', distance: '7.2 km', cost: '₹600', rating: '4.9', crowd: 'free', image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800' }
+      ],
+      'creative-30': [
+        { name: 'Street Art Workshop', description: 'Quick graffiti lesson on legal wall', distance: '1.5 km', cost: '₹200', rating: '4.7', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1499781350541-7783f6c6a0c8?w=800' },
+        { name: 'Poetry Writing Café', description: 'Pen verses in inspiring atmosphere', distance: '1.1 km', cost: '₹100', rating: '4.6', crowd: 'free', image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800' },
+        { name: 'Sketchbook Park Session', description: 'Draw nature with provided supplies', distance: '0.8 km', cost: 'Free', rating: '4.8', crowd: 'free', image: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800' },
+        { name: 'Origami Drop-In', description: 'Learn paper folding techniques', distance: '1.9 km', cost: '₹150', rating: '4.5', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1496950866446-3253e1470e8e?w=800' },
+        { name: 'Indie Bookshop Browse', description: 'Discover hidden literary gems', distance: '1.3 km', cost: 'Free', rating: '4.9', crowd: 'free', image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800' },
+        { name: 'Quick Sketch Portrait', description: 'Get drawn by street artist', distance: '2.2 km', cost: '₹250', rating: '4.7', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800' }
+      ],
+      'creative-60': [
+        { name: 'Watercolor Workshop', description: 'Paint landscapes with expert guidance', distance: '2.8 km', cost: '₹400', rating: '4.8', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=800' },
+        { name: 'Photography Walk', description: 'Capture city beauty with pro tips', distance: '2.3 km', cost: '₹300', rating: '4.7', crowd: 'free', image: 'https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=800' },
+        { name: 'Jewelry Making Class', description: 'Craft your own unique accessories', distance: '3.1 km', cost: '₹500', rating: '4.9', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800' },
+        { name: 'Calligraphy Session', description: 'Master beautiful lettering styles', distance: '2.5 km', cost: '₹350', rating: '4.6', crowd: 'free', image: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=800' },
+        { name: 'Textile Printing Studio', description: 'Design and print on fabric', distance: '2.9 km', cost: '₹450', rating: '4.8', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1558769132-cb1aea2f9eaa?w=800' },
+        { name: 'Music Jam Session', description: 'Improvise with local musicians', distance: '3.4 km', cost: '₹250', rating: '4.7', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800' }
+      ],
+      'creative-120': [
+        { name: 'Sculpture Workshop', description: 'Work with clay and mixed media', distance: '4.2 km', cost: '₹600', rating: '4.9', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1578301978162-7aae4d755744?w=800' },
+        { name: 'Film Photography Class', description: 'Shoot and develop analog photos', distance: '3.8 km', cost: '₹700', rating: '4.8', crowd: 'free', image: 'https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=800' },
+        { name: 'Candle Making Workshop', description: 'Create scented candles from scratch', distance: '3.5 km', cost: '₹500', rating: '4.7', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1602874801006-99ce1a3c9f95?w=800' },
+        { name: 'Glass Blowing Demo', description: 'Learn ancient art of glass shaping', distance: '5.1 km', cost: '₹800', rating: '4.9', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1572635196243-4dd75fbdbd7f?w=800' },
+        { name: 'Songwriting Circle', description: 'Compose music collaboratively', distance: '4.5 km', cost: '₹400', rating: '4.6', crowd: 'free', image: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800' },
+        { name: 'Mural Painting Project', description: 'Contribute to community art wall', distance: '4.8 km', cost: 'Free', rating: '4.8', crowd: 'free', image: 'https://images.unsplash.com/photo-1499781350541-7783f6c6a0c8?w=800' }
+      ],
+      'adventure-30': [
+        { name: 'Urban Parkour Spot', description: 'Practice jumps at beginner-friendly location', distance: '1.6 km', cost: 'Free', rating: '4.7', crowd: 'free', image: 'https://images.unsplash.com/photo-1517649763962-0c623066013b?w=800' },
+        { name: 'Bike Trail Quick Loop', description: 'Scenic 30-minute cycling route', distance: '2.1 km', cost: 'Free', rating: '4.8', crowd: 'free', image: 'https://images.unsplash.com/photo-1541625602330-2277a4c46182?w=800' },
+        { name: 'Skateboard Park', description: 'Try tricks at community ramp park', distance: '1.3 km', cost: 'Free', rating: '4.6', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1547447134-cd3f5c716030?w=800' },
+        { name: 'Bouldering Wall', description: 'Quick climbing session without ropes', distance: '1.9 km', cost: '₹200', rating: '4.9', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1522163182402-834f871fd851?w=800' },
+        { name: 'Nature Scavenger Hunt', description: 'Follow clues through forest trail', distance: '1.5 km', cost: 'Free', rating: '4.5', crowd: 'free', image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800' },
+        { name: 'Zip Line Quick Ride', description: 'Short but thrilling aerial experience', distance: '2.3 km', cost: '₹300', rating: '4.8', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1496080174650-637e3f22fa03?w=800' }
+      ],
+      'adventure-60': [
+        { name: 'Kayaking River Tour', description: 'Paddle through scenic waterways', distance: '3.5 km', cost: '₹500', rating: '4.9', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800' },
+        { name: 'Mountain Bike Trail', description: 'Intermediate off-road cycling path', distance: '4.2 km', cost: '₹350', rating: '4.8', crowd: 'free', image: 'https://images.unsplash.com/photo-1541625602330-2277a4c46182?w=800' },
+        { name: 'Rope Course Adventure', description: 'Aerial obstacles through trees', distance: '3.8 km', cost: '₹600', rating: '4.7', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1496080174650-637e3f22fa03?w=800' },
+        { name: 'Cave Exploration', description: 'Guided spelunking with headlamps', distance: '5.1 km', cost: '₹450', rating: '4.8', crowd: 'free', image: 'https://images.unsplash.com/photo-1484428582319-4ff8bf0b8911?w=800' },
+        { name: 'Stand-Up Paddleboarding', description: 'Balance challenge on calm lake', distance: '3.2 km', cost: '₹400', rating: '4.6', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=800' },
+        { name: 'Outdoor Obstacle Course', description: 'Test agility and strength', distance: '2.9 km', cost: '₹300', rating: '4.7', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1517649763962-0c623066013b?w=800' }
+      ],
+      'adventure-120': [
+        { name: 'Summit Hike Challenge', description: 'Reach mountain peak with stunning views', distance: '8.5 km', cost: 'Free', rating: '4.9', crowd: 'free', image: 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=800' },
+        { name: 'Rafting Expedition', description: 'Navigate rapids with experienced guide', distance: '12.3 km', cost: '₹1000', rating: '4.9', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800' },
+        { name: 'Rock Climbing Full Route', description: 'Multi-pitch climb with instruction', distance: '6.8 km', cost: '₹800', rating: '4.8', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1522163182402-834f871fd851?w=800' },
+        { name: 'Paragliding Experience', description: 'Tandem flight over valley', distance: '15.2 km', cost: '₹1500', rating: '4.9', crowd: 'free', image: 'https://images.unsplash.com/photo-1490730141103-6cac27aaab94?w=800' },
+        { name: 'Canyoning Adventure', description: 'Descend waterfalls and swim pools', distance: '9.7 km', cost: '₹1200', rating: '4.8', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1484428582319-4ff8bf0b8911?w=800' },
+        { name: 'Mountain Biking Extreme', description: 'Advanced downhill trails', distance: '7.4 km', cost: '₹600', rating: '4.7', crowd: 'free', image: 'https://images.unsplash.com/photo-1541625602330-2277a4c46182?w=800' }
+      ],
+      'hungry-30': [
+        { name: 'Taco Truck Alley', description: 'Authentic street tacos with secret sauce', distance: '1.2 km', cost: '₹150', rating: '4.8', crowd: 'busy', image: 'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=800' },
+        { name: 'Dimsum Express', description: 'Steaming baskets of handmade dumplings', distance: '0.9 km', cost: '₹200', rating: '4.7', crowd: 'busy', image: 'https://images.unsplash.com/photo-1563245372-f21724e3856d?w=800' },
+        { name: 'Pizza by the Slice', description: 'New York style with creative toppings', distance: '1.5 km', cost: '₹180', rating: '4.6', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800' },
+        { name: 'Bubble Waffle Stand', description: 'Hong Kong style with ice cream filling', distance: '1.1 km', cost: '₹120', rating: '4.9', crowd: 'busy', image: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?w=800' },
+        { name: 'Chaat Corner', description: 'Spicy Indian street snacks', distance: '0.7 km', cost: '₹100', rating: '4.8', crowd: 'busy', image: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800' },
+        { name: 'Ramen Quick Stop', description: 'Steaming bowls of authentic noodles', distance: '1.8 km', cost: '₹250', rating: '4.7', crowd: 'busy', image: 'https://images.unsplash.com/photo-1557872943-16a5ac26437e?w=800' }
+      ],
+      'hungry-60': [
+        { name: 'Hidden Sushi Counter', description: 'Chef-selected omakase experience', distance: '2.8 km', cost: '₹600', rating: '4.9', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=800' },
+        { name: 'BBQ Smokehouse', description: 'Slow-cooked ribs and brisket', distance: '3.2 km', cost: '₹500', rating: '4.8', crowd: 'busy', image: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800' },
+        { name: 'Mediterranean Mezze Bar', description: 'Shared plates and fresh pita', distance: '2.5 km', cost: '₹400', rating: '4.7', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1544025162-d76694265947?w=800' },
+        { name: 'Thai Street Kitchen', description: 'Spicy curries and pad thai', distance: '2.9 km', cost: '₹350', rating: '4.8', crowd: 'busy', image: 'https://images.unsplash.com/photo-1559314809-0d155014e29e?w=800' },
+        { name: 'Burger Joint Craft', description: 'Gourmet burgers with unique ingredients', distance: '2.3 km', cost: '₹450', rating: '4.9', crowd: 'busy', image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800' },
+        { name: 'Vietnamese Pho House', description: 'Aromatic broth with fresh herbs', distance: '3.1 km', cost: '₹300', rating: '4.6', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1559314809-0d155014e29e?w=800' }
+      ],
+      'hungry-120': [
+        { name: 'Farm-to-Table Tasting', description: 'Multi-course meal with local ingredients', distance: '5.2 km', cost: '₹1200', rating: '4.9', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800' },
+        { name: 'Korean BBQ Feast', description: 'Grill your own meat with unlimited sides', distance: '4.5 km', cost: '₹800', rating: '4.8', crowd: 'busy', image: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800' },
+        { name: 'Indian Thali Experience', description: 'Complete platter with 12 dishes', distance: '3.8 km', cost: '₹500', rating: '4.9', crowd: 'busy', image: 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800' },
+        { name: 'Italian Trattoria', description: 'Handmade pasta and slow-cooked sauces', distance: '4.9 km', cost: '₹900', rating: '4.8', crowd: 'moderate', image: 'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=800' },
+        { name: 'Seafood Market Grill', description: 'Choose fresh catch and have it cooked', distance: '6.2 km', cost: '₹1000', rating: '4.7', crowd: 'busy', image: 'https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800' },
+        { name: 'Food Tour Walking', description: 'Sample 8 dishes across neighborhood', distance: '4.1 km', cost: '₹700', rating: '4.9', crowd: 'busy', image: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800' }
+      ]
+    };
+
+    const aiSuggestions = {
+      'bored-30': '🎮 Perfect time for a quick dopamine hit - try something hands-on and interactive!',
+      'bored-60': '🎯 An hour is perfect for trying something completely new - challenge yourself!',
+      'bored-120': '🚀 You have time for a real adventure - go big and create memorable experiences!',
+      'lonely-30': '💙 Sometimes company is just a paw or smile away - connect with others in cozy spaces.',
+      'lonely-60': '🤝 Great duration to bond with new people - shared activities create instant friendships!',
+      'lonely-120': '👥 Perfect for building deeper connections - join group activities and make lasting memories!',
+      'peace-30': '🍃 Your mind deserves this break - find your quiet corner and breathe deeply.',
+      'peace-60': '🧘 An hour of peace can reset your entire day - immerse yourself in tranquility.',
+      'peace-120': '☮️ Two hours of serenity awaits - disconnect fully and find your inner calm.',
+      'fun-30': '🎉 Quick bursts of joy are what you need - spontaneous fun is the best fun!',
+      'fun-60': '💃 An hour of pure entertainment - dance, laugh, and let loose completely!',
+      'fun-120': '🥳 Time to party properly - full immersion in joy and celebration awaits!',
+      'romantic-30': '💝 Small moments create big memories - find your intimate hideaway together.',
+      'romantic-60': '❤️ Perfect for a romantic experience - quality time with meaningful connection.',
+      'romantic-120': '💕 Two hours of romance - create unforgettable moments with your special someone!',
+      'creative-30': '🎨 Quick creative bursts spark inspiration - let your imagination flow freely!',
+      'creative-60': '✨ An hour to explore your artistic side - create something uniquely yours!',
+      'creative-120': '🖌️ Deep dive into creativity - plenty of time to craft your masterpiece!',
+      'adventure-30': '⚡ Short on time, big on thrill - quick adventures pack the most punch!',
+      'adventure-60': '🏔️ An hour for real exploration - push your limits and feel alive!',
+      'adventure-120': '🌍 Epic adventure mode activated - go where few dare to venture!',
+      'hungry-30': '🍴 Quick bites, big flavors - satisfy those cravings instantly!',
+      'hungry-60': '🍽️ Time for a proper meal - explore flavors and enjoy the experience!',
+      'hungry-120': '👨‍🍳 Feast mode unlocked - indulge in a complete culinary journey!'
+    };
+
+    function saveToLocalStorage() {
+      localStorage.setItem('sentraUsers', JSON.stringify(allUsers));
+      if (currentUser) {
+        localStorage.setItem('sentraCurrentUser', JSON.stringify(currentUser));
+      }
+    }
+
+    function loadFromLocalStorage() {
+      const savedUser = localStorage.getItem('sentraCurrentUser');
+      if (savedUser) {
+        currentUser = JSON.parse(savedUser);
+        currentView = 'home';
+      }
+    }
+
+    function renderCurrentView() {
+      const app = document.getElementById('app');
+      
+      if (currentView === 'signin') {
+        app.innerHTML = `
+          <div class="content-wrapper">
+            <div class="glass-panel">
+              <div class="logo-header">
+                <h1 class="logo-title">Sentra</h1>
+                <p class="tagline">Don't just go somewhere — go where you belong right now.</p>
+              </div>
+              <div id="message-container"></div>
+              <div class="input-group">
+                <label class="input-label" for="signin-email">Email</label>
+                <input type="email" id="signin-email" class="input-field" placeholder="your@email.com">
+              </div>
+              <div class="input-group">
+                <label class="input-label" for="signin-password">Password</label>
+                <input type="password" id="signin-password" class="input-field" placeholder="Enter your password">
+              </div>
+              <button class="btn-primary" id="signin-btn">Sign In</button>
+              <div class="text-link">
+                Don't have an account? <a id="goto-signup">Sign up here</a>
+              </div>
+            </div>
+          </div>
+        `;
+
+        document.getElementById('signin-btn').addEventListener('click', handleSignIn);
+        document.getElementById('goto-signup').addEventListener('click', () => {
+          currentView = 'signup';
+          renderCurrentView();
+        });
+      } else if (currentView === 'signup') {
+        app.innerHTML = `
+          <div class="content-wrapper">
+            <div class="glass-panel">
+              <div class="logo-header">
+                <h1 class="logo-title">Sentra</h1>
+                <p class="tagline">Create your vibe profile</p>
+              </div>
+              <div id="message-container"></div>
+              <div class="input-group">
+                <label class="input-label" for="signup-name">Full Name</label>
+                <input type="text" id="signup-name" class="input-field" placeholder="Your name">
+              </div>
+              <div class="input-group">
+                <label class="input-label" for="signup-email">Email</label>
+                <input type="email" id="signup-email" class="input-field" placeholder="your@email.com">
+              </div>
+              <div class="input-group">
+                <label class="input-label" for="signup-password">Password</label>
+                <input type="password" id="signup-password" class="input-field" placeholder="Create a password">
+              </div>
+              <div class="input-group">
+                <label class="input-label" for="character-word">Describe yourself in one word</label>
+                <input type="text" id="character-word" class="input-field" placeholder="e.g., Adventurous, Chill, Curious">
+              </div>
+              <div class="file-upload">
+                <label class="input-label">Profile Picture (Optional)</label>
+                <div class="file-upload-btn" id="file-upload-label">
+                  📸 Choose a photo
+                </div>
+                <input type="file" id="profile-picture" accept="image/*">
+              </div>
+              <button class="btn-primary" id="signup-btn">Create Account</button>
+              <div class="text-link">
+                Already have an account? <a id="goto-signin">Sign in here</a>
+              </div>
+            </div>
+          </div>
+        `;
+
+        document.getElementById('profile-picture').addEventListener('change', (e) => {
+          const file = e.target.files[0];
+          if (file) {
+            document.getElementById('file-upload-label').textContent = `✓ ${file.name}`;
+          }
+        });
+
+        document.getElementById('signup-btn').addEventListener('click', handleSignUp);
+        document.getElementById('goto-signin').addEventListener('click', () => {
+          currentView = 'signin';
+          renderCurrentView();
+        });
+      } else if (currentView === 'home') {
+        app.innerHTML = `
+          <div class="profile-icon" id="profile-icon">👤</div>
+          <div class="content-wrapper">
+            <div class="logo-header">
+              <h1 class="logo-title">Sentra</h1>
+              <p class="tagline">Don't just go somewhere — go where you belong right now.</p>
+            </div>
+            <div class="glass-panel">
+              <h2 class="section-title">What do you feel like now?</h2>
+              <div class="voice-search">
+                <input type="text" id="voice-search-input" class="input-field" placeholder="Type or speak your mood..." style="padding-right: 60px;">
+                <button class="mic-btn" id="mic-btn">🎤</button>
+              </div>
+              <div class="mood-grid" id="mood-grid">
+                ${moods.map(mood => `
+                  <div class="mood-card" data-mood="${mood.type}">
+                    <div class="mood-emoji">${mood.emoji}</div>
+                    <div class="mood-label">${mood.label}</div>
+                  </div>
+                `).join('')}
+              </div>
+              <div id="time-selector-container"></div>
+              <div id="budget-container"></div>
+              <div id="find-spot-container"></div>
+              <div id="ai-suggestion-container"></div>
+            </div>
+            <div id="recommendations-container"></div>
+          </div>
+        `;
+
+        document.getElementById('profile-icon').addEventListener('click', () => {
+          currentView = 'profile';
+          renderCurrentView();
+        });
+
+        document.getElementById('mic-btn').addEventListener('click', handleVoiceSearch);
+
+        document.querySelectorAll('.mood-card').forEach(card => {
+          card.addEventListener('click', () => {
+            document.querySelectorAll('.mood-card').forEach(c => c.classList.remove('selected'));
+            card.classList.add('selected');
+            selectedMood = card.dataset.mood;
+            showTimeSelector();
+          });
+        });
+      } else if (currentView === 'profile') {
+        app.innerHTML = `
+          <div class="back-btn" id="back-btn">←</div>
+          <div class="content-wrapper">
+            <div class="glass-panel">
+              <div class="logo-header">
+                <h1 class="logo-title">Your Profile</h1>
+              </div>
+              ${currentUser && currentUser.profile_picture ? `
+                <img src="${currentUser.profile_picture}" alt="Profile" class="profile-preview">
+              ` : `
+                <div class="profile-preview" style="background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; font-size: 48px;">
+                  👤
+                </div>
+              `}
+              <div style="text-align: center; margin-bottom: 24px;">
+                <h2 style="color: white; margin: 0 0 8px 0; font-size: 24px; font-weight: 700;">${currentUser ? currentUser.name : ''}</h2>
+                <p style="color: rgba(255,255,255,0.8); margin: 0 0 4px 0; font-size: 16px;">✨ ${currentUser ? currentUser.character_word : ''}</p>
+                <p style="color: rgba(255,255,255,0.7); margin: 0; font-size: 14px;">${currentUser ? currentUser.email : ''}</p>
+              </div>
+              <div class="nav-tabs">
+                <div class="nav-tab active" data-tab="history">History</div>
+                <div class="nav-tab" data-tab="favorites">Favorites</div>
+              </div>
+              <div id="profile-content"></div>
+              <button class="btn-secondary" id="logout-btn">Sign Out</button>
+            </div>
+          </div>
+        `;
+
+        document.getElementById('back-btn').addEventListener('click', () => {
+          currentView = 'home';
+          renderCurrentView();
+        });
+
+        document.getElementById('logout-btn').addEventListener('click', () => {
+          currentUser = null;
+          localStorage.removeItem('sentraCurrentUser');
+          currentView = 'signin';
+          renderCurrentView();
+        });
+
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+          tab.addEventListener('click', () => {
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            renderProfileContent(tab.dataset.tab);
+          });
+        });
+
+        renderProfileContent('history');
+      } else if (currentView === 'map') {
+        app.innerHTML = `
+          <div class="back-btn" id="back-btn">←</div>
+          <div class="content-wrapper">
+            <div class="map-container">
+              <h2 class="section-title">Navigate to ${currentPlace ? currentPlace.name : ''}</h2>
+              <div class="route-options">
+                <button class="route-btn" data-route="fastest">⚡ Fastest</button>
+                <button class="route-btn" data-route="scenic">🌅 Scenic</button>
+                <button class="route-btn" data-route="silent">🤫 Silent</button>
+                <button class="route-btn" data-route="interesting">✨ Interesting</button>
+              </div>
+              <div class="map-placeholder" id="map-display">
+                <div style="text-align: center; padding: 40px;">
+                  <div style="font-size: 64px; margin-bottom: 16px;">🗺️</div>
+                  <p>Select a route above to view the map</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+
+        document.getElementById('back-btn').addEventListener('click', () => {
+          currentView = 'home';
+          renderCurrentView();
+        });
+
+        document.querySelectorAll('.route-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('.route-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            selectedRoute = btn.dataset.route;
+            displayMap(selectedRoute);
+          });
+        });
+      }
+    }
+
+    function showTimeSelector() {
+      const container = document.getElementById('time-selector-container');
+      container.innerHTML = `
+        <h3 style="color: white; text-align: center; margin: 24px 0 16px 0; font-size: 20px;">How much time do you have?</h3>
+        <div class="time-selector">
+          <button class="time-btn" data-time="30">30 min</button>
+          <button class="time-btn" data-time="60">1 hour</button>
+          <button class="time-btn" data-time="120">2 hours</button>
+        </div>
+      `;
+
+      document.querySelectorAll('.time-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+          selectedTime = btn.dataset.time;
+          showBudgetInput();
+          showFindSpotButton();
+        });
+      });
+    }
+
+    function showBudgetInput() {
+      const container = document.getElementById('budget-container');
+      container.innerHTML = `
+        <div class="input-group" style="margin-top: 20px;">
+          <label class="input-label" for="budget-input">Budget (Optional)</label>
+          <input type="text" id="budget-input" class="input-field" placeholder="e.g., ₹500">
+        </div>
+      `;
+    }
+
+    function showFindSpotButton() {
+      const container = document.getElementById('find-spot-container');
+      container.innerHTML = `
+        <button class="btn-primary" id="find-spot-btn" style="margin-top: 20px;">Find my spot</button>
+      `;
+
+      document.getElementById('find-spot-btn').addEventListener('click', () => {
+        showAISuggestion();
+        showRecommendations();
+        
+        setTimeout(() => {
+          const recommendationsContainer = document.getElementById('recommendations-container');
+          if (recommendationsContainer) {
+            recommendationsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 100);
+      });
+    }
+
+    function showAISuggestion() {
+      const key = `${selectedMood}-${selectedTime}`;
+      const suggestion = aiSuggestions[key] || '✨ Great choice! Let me find the perfect places for you.';
+      
+      const container = document.getElementById('ai-suggestion-container');
+      container.innerHTML = `
+        <div class="ai-suggestion">
+          <div class="ai-label">🤖 AI Suggestion</div>
+          <p class="ai-suggestion-text">${suggestion}</p>
+        </div>
+      `;
+    }
+
+    function showRecommendations() {
+      const key = `${selectedMood}-${selectedTime}`;
+      let places = placesDatabase[key] || [];
+      
+      const budgetInput = document.getElementById('budget-input');
+      if (budgetInput && budgetInput.value.trim()) {
+        const budgetValue = parseInt(budgetInput.value.replace(/[^0-9]/g, ''));
+        if (!isNaN(budgetValue)) {
+          places = places.filter(place => {
+            const placeCost = place.cost.toLowerCase() === 'free' ? 0 : parseInt(place.cost.replace(/[^0-9]/g, ''));
+            return placeCost <= budgetValue;
+          });
+        }
+      }
+
+      const crowdIcons = {
+        busy: '🔴',
+        moderate: '🟡',
+        free: '🟢'
+      };
+
+      const crowdLabels = {
+        busy: 'Busy',
+        moderate: 'Not too busy',
+        free: 'Less crowded'
+      };
+
+      const favoritePlaces = currentUser && currentUser.favorite_places ? currentUser.favorite_places.split(',').filter(f => f) : [];
+      
+      const container = document.getElementById('recommendations-container');
+      container.innerHTML = `
+        <h2 class="section-title">Perfect spots for you</h2>
+        ${places.length === 0 ? `
+          <div style="max-width: 800px; margin: 0 auto; text-align: center; padding: 40px 20px;">
+            <div style="font-size: 64px; margin-bottom: 16px;">😔</div>
+            <p style="color: white; font-size: 18px;">No places match your budget. Try increasing it!</p>
+          </div>
+        ` : `
+          <div style="max-width: 800px; margin: 0 auto;">
+            ${places.map((place, index) => {
+              const placeId = `${selectedMood}-${selectedTime}-${index}`;
+              const isFavorite = favoritePlaces.includes(placeId);
+              return `
+                <div class="place-card" data-index="${index}">
+                  <img src="${place.image}" alt="${place.name}" class="place-image" onerror="this.style.display='none'; this.alt='Image unavailable';">
+                  <div class="place-content">
+                    <h3 class="place-name">${place.name}</h3>
+                    <p class="place-description">${place.description}</p>
+                    <div class="place-details">
+                      <span class="detail-item">📍 ${place.distance}</span>
+                      <span class="detail-item">💰 ${place.cost}</span>
+                      <span class="detail-item">⭐ ${place.rating}</span>
+                      <span class="detail-item" title="${crowdLabels[place.crowd]}">${crowdIcons[place.crowd]} ${crowdLabels[place.crowd]}</span>
+                      <span class="detail-item favorite-icon" data-place-id="${placeId}" data-place-name="${place.name}" style="cursor: pointer; font-size: 20px;" title="${isFavorite ? 'Remove from favorites' : 'Add to favorites'}">
+                        ${isFavorite ? '❤️' : '🤍'}
+                      </span>
+                    </div>
+                    <button class="btn-navigate" data-place-index="${index}">Navigate 🧭</button>
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        `}
+      `;
+
+      document.querySelectorAll('.btn-navigate').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const placeIndex = btn.dataset.placeIndex;
+          currentPlace = places[placeIndex];
+          currentView = 'map';
+          renderCurrentView();
+        });
+      });
+
+      document.querySelectorAll('.favorite-icon').forEach(icon => {
+        icon.addEventListener('click', () => {
+          if (!currentUser) return;
+          
+          const placeId = icon.dataset.placeId;
+          const placeName = icon.dataset.placeName;
+          let favorites = currentUser.favorite_places ? currentUser.favorite_places.split(',').filter(f => f) : [];
+          let favoriteNames = currentUser.favorite_place_names ? currentUser.favorite_place_names.split('|||').filter(f => f) : [];
+          
+          if (favorites.includes(placeId)) {
+            const index = favorites.indexOf(placeId);
+            favorites.splice(index, 1);
+            favoriteNames.splice(index, 1);
+            icon.textContent = '🤍';
+            icon.title = 'Add to favorites';
+          } else {
+            favorites.push(placeId);
+            favoriteNames.push(placeName);
+            icon.textContent = '❤️';
+            icon.title = 'Remove from favorites';
+          }
+          
+          currentUser.favorite_places = favorites.join(',');
+          currentUser.favorite_place_names = favoriteNames.join('|||');
+          
+          const userIndex = allUsers.findIndex(u => u.id === currentUser.id);
+          if (userIndex !== -1) {
+            allUsers[userIndex] = currentUser;
+          }
+          
+          saveToLocalStorage();
+        });
+      });
+    }
+
+    function displayMap(route) {
+      const routeColors = {
+        fastest: '#4ade80',
+        scenic: '#fbbf24',
+        silent: '#60a5fa',
+        interesting: '#f472b6'
+      };
+
+      const routeInsights = {
+        fastest: '⚡ Estimated time: 8 minutes via Main Street',
+        scenic: '🌅 Beautiful sunset views along the riverside path',
+        silent: '🤫 Quiet backstreets with minimal traffic',
+        interesting: '✨ Pass by 2 art installations and a historic bookshop'
+      };
+
+      const mapDisplay = document.getElementById('map-display');
+      const color = routeColors[route] || '#4ade80';
+      
+      mapDisplay.innerHTML = `
+        <div style="width: 100%; height: 100%; background: linear-gradient(135deg, ${color}20, ${color}40); display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 40px; text-align: center;">
+          <div style="font-size: 80px; margin-bottom: 20px;">🗺️</div>
+          <p style="font-size: 20px; margin-bottom: 12px; font-weight: 600;">Map Preview</p>
+          <p style="font-size: 14px; opacity: 0.9;">Route to ${currentPlace ? currentPlace.name : ''}</p>
+        </div>
+        <div class="map-overlay">
+          ${routeInsights[route]}
+        </div>
+      `;
+    }
+
+    function handleVoiceSearch() {
+      const micBtn = document.getElementById('mic-btn');
+      const searchInput = document.getElementById('voice-search-input');
+      
+      micBtn.classList.add('listening');
+      
+      setTimeout(() => {
+        micBtn.classList.remove('listening');
+        searchInput.value = "I feel lonely and have 2 hours";
+        
+        const lonelyCard = document.querySelector('[data-mood="lonely"]');
+        if (lonelyCard) {
+          lonelyCard.click();
+          setTimeout(() => {
+            const twoHourBtn = document.querySelector('[data-time="120"]');
+            if (twoHourBtn) twoHourBtn.click();
+          }, 500);
+        }
+      }, 2000);
+    }
+
+    function handleSignIn(e) {
+      e.preventDefault();
+      const email = document.getElementById('signin-email').value.trim();
+      const password = document.getElementById('signin-password').value.trim();
+      const messageContainer = document.getElementById('message-container');
+
+      if (!email || !password) {
+        messageContainer.innerHTML = '<div class="error-message">Please fill in all fields</div>';
+        return;
+      }
+
+      messageContainer.innerHTML = '<div style="text-align: center; padding: 12px;"><span class="loading-spinner"></span></div>';
+
+      setTimeout(() => {
+        const user = allUsers.find(u => u.email === email && u.password === password);
+        
+        if (user) {
+          currentUser = user;
+          localStorage.setItem('sentraCurrentUser', JSON.stringify(currentUser));
+          currentView = 'home';
+          renderCurrentView();
+        } else {
+          messageContainer.innerHTML = '<div class="error-message">Account not found. Please sign up first.</div>';
+          setTimeout(() => {
+            messageContainer.innerHTML += '<div style="text-align: center; margin-top: 12px;"><button class="btn-secondary" id="redirect-signup">Create New Account</button></div>';
+            document.getElementById('redirect-signup').addEventListener('click', () => {
+              currentView = 'signup';
+              renderCurrentView();
+            });
+          }, 100);
+        }
+      }, 1000);
+    }
+
+    function handleSignUp(e) {
+      e.preventDefault();
+      const name = document.getElementById('signup-name').value.trim();
+      const email = document.getElementById('signup-email').value.trim();
+      const password = document.getElementById('signup-password').value.trim();
+      const characterWord = document.getElementById('character-word').value.trim();
+      const profilePictureInput = document.getElementById('profile-picture');
+      const messageContainer = document.getElementById('message-container');
+
+      if (!name || !email || !password || !characterWord) {
+        messageContainer.innerHTML = '<div class="error-message">Please fill in all required fields</div>';
+        return;
+      }
+
+      messageContainer.innerHTML = '<div style="text-align: center; padding: 12px;"><span class="loading-spinner"></span></div>';
+
+      let profilePictureUrl = null;
+      if (profilePictureInput.files && profilePictureInput.files[0]) {
+        const file = profilePictureInput.files[0];
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          profilePictureUrl = e.target.result;
+          completeSignup();
+        };
+        reader.readAsDataURL(file);
+      } else {
+        completeSignup();
+      }
+
+      function completeSignup() {
+        const newUser = {
+          id: Date.now().toString(),
+          name,
+          email,
+          password,
+          character_word: characterWord,
+          profile_picture: profilePictureUrl || '',
+          visited_places: '',
+          favorite_places: '',
+          favorite_place_names: ''
+        };
+
+        allUsers.push(newUser);
+        currentUser = newUser;
+        saveToLocalStorage();
+        
+        currentView = 'home';
+        renderCurrentView();
+      }
+    }
+
+    function renderProfileContent(tab) {
+      const container = document.getElementById('profile-content');
+      
+      if (tab === 'history') {
+        container.innerHTML = `
+          <div style="text-align: center; padding: 40px 20px; color: rgba(255,255,255,0.7);">
+            <div style="font-size: 64px; margin-bottom: 16px;">📍</div>
+            <p>Your visited places will appear here</p>
+          </div>
+        `;
+      } else if (tab === 'favorites') {
+        const favoritePlaces = currentUser && currentUser.favorite_places ? currentUser.favorite_places.split(',').filter(f => f) : [];
+        const favoriteNames = currentUser && currentUser.favorite_place_names ? currentUser.favorite_place_names.split('|||').filter(f => f) : [];
+        
+        if (favoritePlaces.length === 0) {
+          container.innerHTML = `
+            <div style="text-align: center; padding: 40px 20px; color: rgba(255,255,255,0.7);">
+              <div style="font-size: 64px; margin-bottom: 16px;">⭐</div>
+              <p>Your favorite spots will be saved here</p>
+              <p style="font-size: 14px; margin-top: 8px;">Tap the 🤍 icon on any place to add it!</p>
+            </div>
+          `;
+        } else {
+          container.innerHTML = `
+            <div>
+              ${favoritePlaces.map((placeId, index) => `
+                <div class="history-item">
+                  <div>
+                    <div class="history-name">${favoriteNames[index] || 'Favorite Place'}</div>
+                  </div>
+                  <button class="btn-small remove-favorite-btn" data-place-id="${placeId}" data-index="${index}">Remove</button>
+                </div>
+              `).join('')}
+            </div>
+          `;
+
+          document.querySelectorAll('.remove-favorite-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+              const placeId = btn.dataset.placeId;
+              const index = parseInt(btn.dataset.index);
+              
+              let favorites = currentUser.favorite_places.split(',').filter(f => f);
+              let favoriteNames = currentUser.favorite_place_names ? currentUser.favorite_place_names.split('|||').filter(f => f) : [];
+              
+              favorites.splice(index, 1);
+              favoriteNames.splice(index, 1);
+              
+              currentUser.favorite_places = favorites.join(',');
+              currentUser.favorite_place_names = favoriteNames.join('|||');
+              
+              const userIndex = allUsers.findIndex(u => u.id === currentUser.id);
+              if (userIndex !== -1) {
+                allUsers[userIndex] = currentUser;
+              }
+              
+              saveToLocalStorage();
+              renderProfileContent('favorites');
+            });
+          });
+        }
+      }
+    }
+
+    loadFromLocalStorage();
+    renderCurrentView();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9aa1e7aa41af3989',t:'MTc2NTA4ODI5OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyArsOi05k2WKoH6OSOBkCHnNF77fjBbE0o",
+    authDomain: "sentra-1d70a.firebaseapp.com",
+    projectId: "sentra-1d70a",
+    storageBucket: "sentra-1d70a.firebasestorage.app",
+    messagingSenderId: "684809798496",
+    appId: "1:684809798496:web:873c2107bc87438f661405"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+</script>
+
+
+
+</html>
